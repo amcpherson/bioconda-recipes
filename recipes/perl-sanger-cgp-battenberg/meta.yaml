@@ -1,14 +1,13 @@
 package:
   name: perl-sanger-cgp-battenberg
-  version: '1.4.1'
+  version: '1.5.3'
 
 source:
-  fn: cgpBattenberg-1.4.1_3.tar.gz
-  url: https://github.com/chapmanb/cgpBattenberg/archive/a4fec2c.tar.gz
-  #url: https://github.com/cancerit/cgpBattenberg/archive/ef74823.tar.gz
+  git_url: https://github.com/cancerit/cgpBattenberg.git
+  git_rev: 1.5.3
 
 build:
-  number: 3
+  number: 1
   skip: True # [osx]
 
 requirements:
@@ -21,22 +20,26 @@ requirements:
     - perl-file-sharedir-install
     - perl-pcap
     - perl-sanger-cgp-allelecount
+    - perl-bio-db-hts
     - cancerit-allelecount
     - impute2
   run:
     - libgcc
+    - htslib
     - perl-threaded
     - perl-file-sharedir
     - perl-file-sharedir-install
     - perl-pcap
     - perl-sanger-cgp-allelecount
+    - perl-bio-db-hts
+    - r
+    - r-rcolorbrewer
     - cancerit-allelecount
     - impute2
 
 test:
-  imports:
-    - Sanger::CGP::Battenberg
   commands:
+    - "perl -e 'import Sanger::CGP::Battenberg;'"
     - "battenberg.pl 2>&1 | grep battenberg.pl"
 
 about:
